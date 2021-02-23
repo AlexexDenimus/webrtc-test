@@ -1,15 +1,14 @@
 const express = require("express");
 const http = require("http");
-const socket = require("socket.io");
-
 const app = express();
 const server = http.createServer(app);
-
+const socket = require("socket.io");
 const io = socket(server);
 
 const rooms = {};
 
 io.on("connection", (socket) => {
+  console.log("con");
   socket.on("join room", (roomID) => {
     if (rooms[roomID]) {
       rooms[roomID].push(socket.id);
